@@ -1,6 +1,6 @@
 # Tumor Classification from HRMAS NMR Spectrum
 
-[Machine Learning Assisted Intraoperative Assessment of Brain Tumor Margins Using HRMAS NMR Spectroscopy](https://www.medrxiv.org/content/10.1101/2020.02.24.20026955v1)
+[Machine Learning Assisted Intraoperative Assessment of Brain Tumor Margins Using HRMAS NMR Spectroscopy](https://www.medrxiv.org/content/10.1101/2020.02.24.20026955v1) <br/>
 Doruk Cakmakci, Emin Onur Karakaslar, Elisa Ruhland, Marie-Pierre Chenard, Francois Proust, Martial Piotto, Izzie Jacques Namer and A. Ercument Cicek
 
 ## Scripts
@@ -9,7 +9,7 @@ Doruk Cakmakci, Emin Onur Karakaslar, Elisa Ruhland, Marie-Pierre Chenard, Franc
 [SHAP Value Plotting](./plot_shap.py): This script contains function used for generating SHAP Value Plots given in Figure 3 in the paper. 
 
 ### Benign vs. Malignant Glioma Classification Models
-[Random Forest](./control_tumor/rf.py), [CNN](./control_tumor/cnn.py) , [Fully-connected NN](./control_tumor/nn.py), [SVM](./control_tumor/svm.py) , [PLSDA](./control_tumor/plsda.py)
+[Random Forest](./benign_aggressive/rf.py), [CNN](./benign_aggressive/cnn.py) , [Fully-connected NN](./benign_aggressive/nn.py), [SVM](./benign_aggressive/svm.py) , [PLSDA](./benign_aggressive/plsda.py)
 ### Control vs. Glioma Classification Models
 [Random Forest](./control_tumor/rf.py), [CNN](./control_tumor/cnn.py), [Fully-connected NN](./control_tumor/nn.py), [SVM](./control_tumor/svm.py), [PLSDA](./control_tumor/plsda.py)
 
@@ -22,6 +22,7 @@ Doruk Cakmakci, Emin Onur Karakaslar, Elisa Ruhland, Marie-Pierre Chenard, Franc
 - [shap](https://github.com/slundberg/shap)
 
 ## Getting Started
+ - Create **/data** and **/lib** folders.
  - Download and Extract the dataset as a subdirectory of **/data** folder
  - Download and save Supplementary Table 1 to **/data** folder. Rename the file to _supplement.xls_
  - Install dependencies. If an Ubuntu machine with GPU is used, dependencies may be installed by creating a conda environment using _ubuntu\_environment.yml_ file and installing _shap_  dependency using conda.
