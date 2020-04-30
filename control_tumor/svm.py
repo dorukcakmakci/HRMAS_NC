@@ -16,10 +16,6 @@ from sklearn.metrics import (confusion_matrix, precision_score, recall_score, f1
 
 sys.path.insert(1, '../')
 
-# since numerous executions will be made define the following variable
-# to store logs and plots reasonably 
-execution = "run_1"
-
 # import data
 # uncomment corresponding line to process the corresponding problem
 dataset_name = "control_tumor" 
@@ -214,28 +210,28 @@ for test_index in [1, 2, 3, 4, 5, 6, 7, 8]:
     print("AUROC: ", auroc)
     print("AUPR: ", aupr)
 
-# append metrics per fold to a run file
-with open("./logs/SVM/auroc_scores.txt", "a") as f:
-    for auroc in auroc_folds:
-        f.write("%f\n" % (auroc))
-with open("./logs/SVM/aupr_scores.txt", "a") as f:
-    for aupr in aupr_folds:
-        f.write("%f\n" % (aupr))
-with open("./logs/SVM/f1_scores.txt", "a") as f:
-    for f1 in f1_folds:
-        f.write("%f\n" % (f1))  
-with open("./logs/SVM/precision_scores.txt", "a") as f:
-    for prec in precision_folds:
-        f.write("%f\n" % (prec))
-with open("./logs/SVM/recall_scores.txt", "a") as f:
-    for rec in recall_folds:
-        f.write("%f\n" % (rec))   
-with open("./logs/SVM/acc_scores.txt", "a") as f:
-    for acc in acc_folds:
-        f.write("%f\n" % (acc))
-with open("./logs/SVM/test_timing.txt", "a") as f:
-    for test in test_time_folds:
-        f.write("%f\n" % (test))
-with open("./logs/SVM/train_timing.txt", "a") as f:
-    for train in train_time_folds:
-        f.write("%f\n" % (train)) 
+# # append metrics per fold to a run file
+# with open("./logs/SVM/auroc_scores.txt", "a") as f:
+#     for auroc in auroc_folds:
+#         f.write("%f\n" % (auroc))
+# with open("./logs/SVM/aupr_scores.txt", "a") as f:
+#     for aupr in aupr_folds:
+#         f.write("%f\n" % (aupr))
+# with open("./logs/SVM/f1_scores.txt", "a") as f:
+#     for f1 in f1_folds:
+#         f.write("%f\n" % (f1))  
+# with open("./logs/SVM/precision_scores.txt", "a") as f:
+#     for prec in precision_folds:
+#         f.write("%f\n" % (prec))
+# with open("./logs/SVM/recall_scores.txt", "a") as f:
+#     for rec in recall_folds:
+#         f.write("%f\n" % (rec))   
+# with open("./logs/SVM/acc_scores.txt", "a") as f:
+#     for acc in acc_folds:
+#         f.write("%f\n" % (acc))
+# with open("./logs/SVM/test_timing.txt", "a") as f:
+#     for test in test_time_folds:
+#         f.write("%f\n" % (test))
+# with open("./logs/SVM/train_timing.txt", "a") as f:
+#     for train in train_time_folds:
+#         f.write("%f\n" % (train)) 

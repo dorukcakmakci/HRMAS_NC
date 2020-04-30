@@ -177,18 +177,11 @@ for test_index in [1, 2, 3, 4, 5, 6, 7, 8]:
     explainer = shap.TreeExplainer(clf)
     shap_values = explainer.shap_values(test_hydrogens_normalized)
     # for benign class
-    plot_all_shap_values(shap_values[0],test_hydrogens_normalized,"./plots/RF/benign_aggressive_shap_benign_all_spectrum_test_fold_"+str(test_index))
-    plot_top_k_shap_values(shap_values[0],test_hydrogens_normalized, 100, "./plots/RF/benign_aggressive_shap_benign_top_k_spectrum_test_fold_"+str(test_index))
-    
-    # shap.summary_plot(shap_values[0],test_hydrogens_normalized, show=False, max_display=spectrum_length, plot_type="bar")
-    # plt.savefig("./plots/RF/shap_benign_test_fold_"+str(test_index)+".png")
+    plot_all_shap_values(shap_values[0],test_hydrogens_normalized,"./benign_aggressive_shap_benign_all_spectrum_test_fold_"+str(test_index))
+    plot_top_k_shap_values(shap_values[0],test_hydrogens_normalized, 100, "./benign_aggressive_shap_benign_top_k_spectrum_test_fold_"+str(test_index))
     # for aggressive class
-    plot_all_shap_values(shap_values[1],test_hydrogens_normalized,"./plots/RF/benign_aggressive_shap_aggressive_all_spectrum_test_fold_"+str(test_index))
-    plot_top_k_shap_values(shap_values[1],test_hydrogens_normalized, 100, "./plots/RF/benign_aggressive_shap_aggressive_top_k_spectrum_test_fold_"+str(test_index))
-    # shap.summary_plot(shap_values[1],test_hydrogens_normalized, show=False, max_display=spectrum_length, plot_type="bar")
-    # plt.savefig("./plots/RF/shap_aggressive_test_fold_"+str(test_index)+".png")
-    # shap.summary_plot(shap_values[0], test_hydrogens_normalized, show=False)
-    # plt.close()
+    plot_all_shap_values(shap_values[1],test_hydrogens_normalized,"./benign_aggressive_shap_aggressive_all_spectrum_test_fold_"+str(test_index))
+    plot_top_k_shap_values(shap_values[1],test_hydrogens_normalized, 100, "./benign_aggressive_shap_aggressive_top_k_spectrum_test_fold_"+str(test_index))
 
 
     test_start = time.time()
@@ -224,16 +217,6 @@ for test_index in [1, 2, 3, 4, 5, 6, 7, 8]:
     std = np.std([tree.feature_importances_ for tree in clf.estimators_],
              axis=0)
 
-    plt.figure()
-    plt.title("Feature importances")
-    plt.bar(range(test_hydrogens_normalized.shape[1]), importances,
-        color="r", align="center")
-    # plt.xticks(range(test_hydrogens_normalized.shape[1]), range(1,spectrum_length+1))
-    plt.xlim([-1, test_hydrogens_normalized.shape[1]])
-    plt.axis('tight')
-    plt.savefig("./plots/RF/feature_importance_test_fold_" + str(test_index) + ".png")
-    feature_importances.append(importances)
-
 
     print("Class based accuracies: ")
     for i in range(2):
@@ -247,41 +230,28 @@ for test_index in [1, 2, 3, 4, 5, 6, 7, 8]:
     print("AUROC: ", auroc)
     print("AUPR: ", aupr)
 
-# append metrics per fold to a run file
-with open("./logs/RF/auroc_scores.txt", "a") as f:
-    for auroc in auroc_folds:
-        f.write("%f\n" % (auroc))
-with open("./logs/RF/aupr_scores.txt", "a") as f:
-    for aupr in aupr_folds:
-        f.write("%f\n" % (aupr))
-with open("./logs/RF/f1_scores.txt", "a") as f:
-    for f1 in f1_folds:
-        f.write("%f\n" % (f1))  
-with open("./logs/RF/precision_scores.txt", "a") as f:
-    for prec in precision_folds:
-        f.write("%f\n" % (prec))
-with open("./logs/RF/recall_scores.txt", "a") as f:
-    for rec in recall_folds:
-        f.write("%f\n" % (rec))   
-with open("./logs/RF/acc_scores.txt", "a") as f:
-    for acc in acc_folds:
-        f.write("%f\n" % (acc))
-with open("./logs/RF/test_timing.txt", "a") as f:
-    for test in test_time_folds:
-        f.write("%f\n" % (test))
-with open("./logs/RF/train_timing.txt", "a") as f:
-    for train in train_time_folds:
-        f.write("%f\n" % (train))  
-
-# feature importance analysis 
-feature_importances = np.array(feature_importances)
-feature_importance_mean = np.mean(feature_importances, axis=0)
-feature_importance_std = np.std(feature_importances, axis=0)
-plt.figure()
-plt.title("Mean Feature Importance while distinguishing tumor samples from control samples")
-plt.bar(range(test_hydrogens_normalized.shape[1]),feature_importance_mean,color="r", align="center")
-plt.savefig("./plots/RF/feature_importance_mean.png")
-plt.figure()
-plt.title("Standard Deviation of Feature Importance while distinguishing tumor samples from control samples")
-plt.bar(range(test_hydrogens_normalized.shape[1]),feature_importance_std,color="r", align="center")
-plt.savefig("./plots/RF/feature_importance_std.png")
+# # append metrics per fold to a run file
+# with open("./logs/RF/auroc_scores.txt", "a") as f:
+#     for auroc in auroc_folds:
+#         f.write("%f\n" % (auroc))
+# with open("./logs/RF/aupr_scores.txt", "a") as f:
+#     for aupr in aupr_folds:
+#         f.write("%f\n" % (aupr))
+# with open("./logs/RF/f1_scores.txt", "a") as f:
+#     for f1 in f1_folds:
+#         f.write("%f\n" % (f1))  
+# with open("./logs/RF/precision_scores.txt", "a") as f:
+#     for prec in precision_folds:
+#         f.write("%f\n" % (prec))
+# with open("./logs/RF/recall_scores.txt", "a") as f:
+#     for rec in recall_folds:
+#         f.write("%f\n" % (rec))   
+# with open("./logs/RF/acc_scores.txt", "a") as f:
+#     for acc in acc_folds:
+#         f.write("%f\n" % (acc))
+# with open("./logs/RF/test_timing.txt", "a") as f:
+#     for test in test_time_folds:
+#         f.write("%f\n" % (test))
+# with open("./logs/RF/train_timing.txt", "a") as f:
+#     for train in train_time_folds:
+#         f.write("%f\n" % (train))  

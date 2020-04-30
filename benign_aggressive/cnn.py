@@ -24,13 +24,9 @@ ITERATION = 200
 NUM_CLASSES = 2
 ETA = 1e-4
 
-# since numerous executions will be made define the following variable
-# to store logs and plots reasonably 
-execution = "run_1"
-
 # two running environment options below:
 # device = torch.device("cpu")
-device = torch.device("cuda:7")
+device = torch.device("cuda:0")
 dtype = torch.float
 
 # import data
@@ -191,55 +187,6 @@ print("Fold 1 Hydrogens: ", fold_1_hydrogens.shape, "\t Fold 1 Labels: ", fold_1
 
 spectrum_length = fold_1_hydrogens.shape[1]
 
-# class model_ca(nn.Module):
-#     def __init__(self):
-#         super(model_ca, self).__init__()
-#         self.class_count = NUM_CLASSES
-#         # self.hidden = [1977, 1000, 200]
-#         self.hidden = [7104, 800] # 5034
-
-#         self.conv1 = nn.Conv1d(1,3,16, stride=2)
-#         self.conv2 = nn.Conv1d(1,3,32, stride=4)
-#         self.conv3 = nn.Conv1d(1,3,64, stride=8, dilation=4)
-
-#         self.conv4 = nn.Conv1d(1,1,100, stride=4)
-
-
-#         self.conv_1_1x1 = nn.Conv1d(3,2,1)
-#         self.conv_2_1x1 = nn.Conv1d(3,2,1)
-#         self.conv_3_1x1 = nn.Conv1d(3,2,1)
-#         self.conv_4_1x1 = nn.Conv1d(4,1,1)
-
-#         self.mp2 = nn.MaxPool1d(2)
-#         self.mp3 = nn.MaxPool1d(3)
-#         self.mp4 = nn.MaxPool1d(4)
-
-#         self.dropout = nn.Dropout(0.2)
-
-#         self.fc1 = nn.Linear(self.hidden[0], self.hidden[1])
-#         self.fc2 = nn.Linear(self.hidden[1], self.class_count)
-
-#     def forward(self, x_):
-#         x = x_.data.unsqueeze(1)
-
-#         x1 = self.conv_1_1x1(self.mp2(F.relu(self.conv1(x))))
-#         x2 = self.conv_2_1x1(self.mp2(F.relu(self.conv2(x))))
-#         x3 = self.conv_3_1x1(self.mp2(F.relu(self.conv3(x))))
-
-#         # x1_4 = F.relu(self.conv4(x1))
-#         # x2_4 = F.relu(self.conv4(x2))
-
-#         x1 = x1.view(x1.size(0), -1)
-#         x2 = x2.view(x2.size(0), -1)
-#         x3 = x3.view(x3.size(0), -1)
-
-#         x = torch.cat((x1,x2,x3), dim=1).data.squeeze()
-
-#         # x = self.dropout(x)
-#         x = F.relu(self.fc1(x))
-#         x = self.fc2(x)
-#         return F.softmax(x, dim=1)
-
 class model_ca(nn.Module):
     def __init__(self):
         super(model_ca, self).__init__()
@@ -281,91 +228,6 @@ class model_ca(nn.Module):
         x = self.fc3(x)
 
         return F.softmax(x.squeeze(), dim=1)
-        
-
-# class model_ca(nn.Module):
-#     def __init__(self):
-#         super(model_ca, self).__init__()
-#         self.class_count = NUM_CLASSES
-#         # self.hidden = [1977, 1000, 200]
-#         self.hidden = [4166]
-
-#         self.conv1 = nn.Conv1d(1,10,20, stride=2, dilation=4)
-#         self.conv2 = nn.Conv1d(10,20,60, stride=2, dilation=2)
-#         self.conv3 = nn.Conv1d(1,8,100, stride=1,dilation=8)
-
-#         self.conv_1_1x1 = nn.Conv1d(20,1,1)
-#         self.conv_2_1x1 = nn.Conv1d(8,1,1)
-
-#         self.mp2 = nn.MaxPool1d(2)
-#         self.mp3 = nn.MaxPool1d(3)
-#         self.mp4 = nn.MaxPool1d(4)
-
-#         self.dropout = nn.Dropout(0.1)
-
-#         self.fc1 = nn.Linear(self.hidden[0], self.class_count)
-
-#     def forward(self, x_):
-#         x = x_.data.unsqueeze(1)
-
-#         x1 = self.mp2(F.relu(self.conv1(x)))
-#         x1 = self.mp2(self.conv_1_1x1(F.relu(self.conv2(x1))))
-
-#         x2 = self.mp2(self.conv_2_1x1(F.relu(self.conv3(x))))
-
-#         x = torch.cat((x1,x2), dim=2).data.squeeze()
-#         x = self.dropout(x)
-#         x = self.fc1(x)
-#         return F.softmax(x, dim=1)
-
-# class model_ca(nn.Module):
-#     def __init__(self):
-#         super(model_ca, self).__init__()
-#         self.class_count = NUM_CLASSES
-#         # self.hidden = [1977, 1000, 200]
-#         self.hidden = [532]
-
-#         self.mp4 = nn.MaxPool1d(4)
-#         self.mp2 = nn.MaxPool1d(2)
-
-#         self.conv1 = nn.Conv1d(1,2,4, stride=1, dilation=4)
-#         self.conv2 = nn.Conv1d(1,2,8, stride=1, dilation=4)
-#         self.conv3 = nn.Conv1d(1,2,16, stride=2, dilation=4)
-#         self.conv4 = nn.Conv1d(1,2,32, stride=2, dilation=4)
-#         self.conv5 = nn.Conv1d(1,2,64, stride=3, dilation=1)
-#         self.conv6 = nn.Conv1d(1,2,128, stride=3, dilation=1)
-
-        # self.conv_1_1x1 = nn.Conv1d(2,1,1)
-        # self.conv_2_1x1 = nn.Conv1d(2,1,1)
-        # self.conv_3_1x1 = nn.Conv1d(2,1,1)
-        # self.conv_4_1x1 = nn.Conv1d(2,1,1)
-        # self.conv_5_1x1 = nn.onv1d(2,1,1)
-        # self.conv_6_1x1 = nn.Conv1d(2,1,1)
-
-#         self.conv_comb = nn.Conv1d(1,3,32, stride=5)
-
-#         self.dropout = nn.Dropout(0.3)
-
-#         self.conv_comb_1x1 = nn.Conv1d(3,1,1)
-
-#         self.fc1 = nn.Linear(self.hidden[0], self.class_count)
-
-#     def forward(self, x_):
-#         x = x_.data.unsqueeze(1)
-
-#         x2 = self.conv_2_1x1(self.mp4(F.relu(self.conv2(x)))).squeeze()
-#         x3 = self.conv_3_1x1(self.mp4(F.relu(self.conv3(x)))).squeeze()
-#         x4 = self.conv_4_1x1(self.mp4(F.relu(self.conv4(x)))).squeeze()
-#         x6 = self.conv_6_1x1(self.mp4(F.relu(self.conv6(x)))).squeeze()
-        
-#         x = torch.cat((x3,x4,x6), dim= 1).data.unsqueeze(1)
-
-#         x = F.relu(self.conv_comb(x))
-#         x = self.conv_comb_1x1(x)
-#         x = self.dropout(x)
-#         x = self.fc1(x)
-
-#         return F.softmax(x.squeeze(), dim=1)
 
 # custom weight initialization
 def init_weights(m):
@@ -599,102 +461,6 @@ for test_index in test_indices:
     print("AUPR: ", aupr)
     print("F1 Score: ", f1)
 
-    # print("F2 Score: ", fbeta_score(test_labels.T, test_labels_pred.reshape(-1,1), beta=2, average='binary'))
-    # print("Confusion Matrix: ", cm)
-    # print("Brier Score:", brier_score)
-    # print("NPV: ", cm[1,1] / (cm[1,1] + cm[1,0]))
-    # print("FPR: ", cm[1,0] / (cm[1,1] + cm[1,0]))
-    # print("FDR: ", cm[1,0] / (cm[0,0] + cm[1,0]))
-
-    # generate perfomance metrics logs
-    # title = "test_fold_" + str(test_index) + "_" + "valid_fold_" + str(valid_index) + "_"
-    # for layer in model.hidden:
-    #     title += str(layer) + "_"
-    # title += "epoch_" + str(ITERATION) + "_performance_metrics.txt"
-    # path = "./logs/CNN/" + execution + "/" + title
-    # with open(path, 'w') as f:
-    #     f.write("Confusion Matrix\n")
-    #     for line in cm:
-    #         f.write(" ".join(str(line)) + "\n")
-    #     f.write("Class based accuracies:\n")
-    #     for i in range(NUM_CLASSES):
-    #         temp = "Class % d: % f\n" %(i, cm[i,i]/np.sum(cm[i,:]))
-    #         f.write(temp)
-    #     f.write("Accuracy: %f\n" %  ((cm[1,1] + cm[0,0]) / (cm[0,0] + cm[0,1] + cm[1,0] + cm[1,1])))
-    #     f.write("Precision: %f\n" % precision_score(test_labels.T, test_labels_pred.reshape(-1,1), average='binary'))
-    #     f.write("Recall: %f\n" % recall_score(test_labels.T, test_labels_pred.reshape(-1,1), average='binary'))
-    #     f.write("F1 Score: %f\n" % f1_score(test_labels.T, test_labels_pred.reshape(-1,1), average='binary'))
-    #     f.write("F2 Score: %f\n" % fbeta_score(test_labels.T, test_labels_pred.reshape(-1,1), beta=2, average='binary'))
-    #     f.write("NPV: %f\n" % (cm[1,1] / (cm[1,1] + cm[1,0])))
-    #     f.write("FPR: %f\n" % (cm[1,0] / (cm[1,1] + cm[1,0])))
-    #     f.write("FDR: %f\n" % (cm[1,0] / (cm[0,0] + cm[1,0])))
-    #     for line in  eval("fold_" + str(test_index) + "_pathology_classes")[wrong_predictions]:
-    #         f.write(" ".join(str(line)) + "\n")
-    #     f.write("NRMN of Wrongly Predicted Data:\n")
-    #     for line in  eval("fold_" + str(test_index) + "_nrmn")[wrong_predictions]:
-    #         f.write(" ".join(str(line)) + "\n")
-
-    # # plot training loss
-    # plt.figure()
-    # plt.plot(range(len(train_loss_history)), train_loss_history)
-    # plt.xlabel("Epoch")
-    # plt.ylabel("Training Loss")
-    # title = "test_fold_" + str(test_index) + "_" + "validation_fold_" + str(valid_index) + "_"
-    # for layer in model.hidden:
-    #     title += str(layer) + "_"
-    # title += "epoch_" + str(ITERATION) + "_training_loss"
-    # plt.title(title)
-    # plt.savefig("./plots/CNN/" + execution + "/" + title + ".png")
-    # plt.close()
-
-    # # plot training accuracy
-    # plt.figure()
-    # plt.plot(range(len(train_acc_history)), train_acc_history)
-    # plt.xlabel("Epoch")
-    # plt.ylabel("Training Accuracy")
-    # title = "test_fold_" + str(test_index) + "_" + "validation_fold_" + str(valid_index) + "_"
-    # for layer in model.hidden:
-    #     title += str(layer) + "_"
-    # title += "epoch_" + str(ITERATION) + "_training_accuracy"
-    # plt.title(title)
-    # plt.savefig("./plots/CNN/" + execution + "/" + title + ".png")
-    # plt.close()
-
-
-    # # plot test set loss
-    # plt.figure()
-    # plt.plot(range(len(valid_loss_history)), valid_loss_history)
-    # plt.xlabel("Epoch")
-    # plt.ylabel("Test Set Loss")
-    # title = "test_fold_" + str(test_index) + "_" + "validation_fold_" + str(valid_index) + "_"
-    # for layer in model.hidden:
-    #     title += str(layer) + "_"
-    # title += "epoch_" + str(ITERATION) + "_validation_set_loss"
-    # plt.title(title)
-    # plt.savefig("./plots/CNN/" + execution + "/" + title + ".png")
-    # plt.close()
-
-    # # plot roc auc of test set during training 
-    # plt.figure()
-    # plt.plot(range(len(auc_history)), auc_history)
-    # plt.xlabel("Epoch")
-    # plt.ylabel("AUC")
-    # title = "test_fold_" + str(test_index) + "_" + "validation_fold_" + str(valid_index) + "_"
-    # for layer in model.hidden:
-    #     title += str(layer) + "_"
-    # title += "epoch_" + str(ITERATION) + "_auc"
-    # plt.title(title)
-    # plt.savefig("./plots/CNN/" + execution + "/" + title + ".png")
-    # plt.close()
-
-    # save model weights
-    # title = "test_fold_" + str(test_index) + "_" + "validation_fold_" + str(valid_index) + "_"
-    # for layer in model.hidden:
-    #     title += str(layer) + "_"
-    # title += "epoch_" + str(ITERATION) + "_weights.pt"
-    # weights_path = "./weights/CNN/" + execution + "/" + title
-    # torch.save(model.state_dict(), weights_path)
-
     model = None
     optimizer = None
     loss_fn = None
@@ -708,28 +474,28 @@ for test_index in test_indices:
     rmsprop = None
     scaler = None
 
-with open("./logs/CNN/auroc_scores.txt", "a") as f:
-    for auroc in auroc_folds:
-        f.write("%f\n" % (auroc))
-with open("./logs/CNN/aupr_scores.txt", "a") as f:
-    for aupr in aupr_folds:
-        f.write("%f\n" % (aupr))
-with open("./logs/CNN/f1_scores.txt", "a") as f:
-    for f1 in f1_folds:
-        f.write("%f\n" % (f1))  
-with open("./logs/CNN/precision_scores.txt", "a") as f:
-    for prec in precision_folds:
-        f.write("%f\n" % (prec))
-with open("./logs/CNN/recall_scores.txt", "a") as f:
-    for rec in recall_folds:
-        f.write("%f\n" % (rec))  
-with open("./logs/CNN/acc_scores.txt", "a") as f:
-    for acc in acc_folds:
-        f.write("%f\n" % (acc))
-with open("./logs/CNN/test_timing.txt", "a") as f:
-    for test in test_time_folds:
-        f.write("%f\n" % (test))
-with open("./logs/CNN/train_timing.txt", "a") as f:
-    for train in train_time_folds:
-        f.write("%f\n" % (train)) 
+# with open("./logs/CNN/auroc_scores.txt", "a") as f:
+#     for auroc in auroc_folds:
+#         f.write("%f\n" % (auroc))
+# with open("./logs/CNN/aupr_scores.txt", "a") as f:
+#     for aupr in aupr_folds:
+#         f.write("%f\n" % (aupr))
+# with open("./logs/CNN/f1_scores.txt", "a") as f:
+#     for f1 in f1_folds:
+#         f.write("%f\n" % (f1))  
+# with open("./logs/CNN/precision_scores.txt", "a") as f:
+#     for prec in precision_folds:
+#         f.write("%f\n" % (prec))
+# with open("./logs/CNN/recall_scores.txt", "a") as f:
+#     for rec in recall_folds:
+#         f.write("%f\n" % (rec))  
+# with open("./logs/CNN/acc_scores.txt", "a") as f:
+#     for acc in acc_folds:
+#         f.write("%f\n" % (acc))
+# with open("./logs/CNN/test_timing.txt", "a") as f:
+#     for test in test_time_folds:
+#         f.write("%f\n" % (test))
+# with open("./logs/CNN/train_timing.txt", "a") as f:
+#     for train in train_time_folds:
+#         f.write("%f\n" % (train)) 
         

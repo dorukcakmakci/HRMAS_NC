@@ -24,13 +24,9 @@ ITERATION = 140
 NUM_CLASSES = 2
 ETA = 1e-4
 
-# since numerous executions will be made define the following variable
-# to store logs and plots reasonably 
-execution = "run_1"
-
 # two running environment options below:
 # device = torch.device("cpu")
-device = torch.device("cuda:3")
+device = torch.device("cuda:0")
 dtype = torch.float
 
 # import data
@@ -440,102 +436,6 @@ for test_index in test_indices:
     print("AUPR: ", aupr)
     print("F1 Score: ", f1)
 
-    # print("F2 Score: ", fbeta_score(test_labels.T, test_labels_pred.reshape(-1,1), beta=2, average='binary'))
-    # print("Confusion Matrix: ", cm)
-    # print("Brier Score:", brier_score)
-    # print("NPV: ", cm[1,1] / (cm[1,1] + cm[1,0]))
-    # print("FPR: ", cm[1,0] / (cm[1,1] + cm[1,0]))
-    # print("FDR: ", cm[1,0] / (cm[0,0] + cm[1,0]))
-
-    # generate perfomance metrics logs
-    # title = "test_fold_" + str(test_index) + "_" + "valid_fold_" + str(valid_index) + "_"
-    # for layer in model.hidden:
-    #     title += str(layer) + "_"
-    # title += "epoch_" + str(ITERATION) + "_performance_metrics.txt"
-    # path = "./logs/CNN/" + execution + "/" + title
-    # with open(path, 'w') as f:
-    #     f.write("Confusion Matrix\n")
-    #     for line in cm:
-    #         f.write(" ".join(str(line)) + "\n")
-    #     f.write("Class based accuracies:\n")
-    #     for i in range(NUM_CLASSES):
-    #         temp = "Class % d: % f\n" %(i, cm[i,i]/np.sum(cm[i,:]))
-    #         f.write(temp)
-    #     f.write("Accuracy: %f\n" %  ((cm[1,1] + cm[0,0]) / (cm[0,0] + cm[0,1] + cm[1,0] + cm[1,1])))
-    #     f.write("Precision: %f\n" % precision_score(test_labels.T, test_labels_pred.reshape(-1,1), average='binary'))
-    #     f.write("Recall: %f\n" % recall_score(test_labels.T, test_labels_pred.reshape(-1,1), average='binary'))
-    #     f.write("F1 Score: %f\n" % f1_score(test_labels.T, test_labels_pred.reshape(-1,1), average='binary'))
-    #     f.write("F2 Score: %f\n" % fbeta_score(test_labels.T, test_labels_pred.reshape(-1,1), beta=2, average='binary'))
-    #     f.write("NPV: %f\n" % (cm[1,1] / (cm[1,1] + cm[1,0])))
-    #     f.write("FPR: %f\n" % (cm[1,0] / (cm[1,1] + cm[1,0])))
-    #     f.write("FDR: %f\n" % (cm[1,0] / (cm[0,0] + cm[1,0])))
-    #     for line in  eval("fold_" + str(test_index) + "_pathology_classes")[wrong_predictions]:
-    #         f.write(" ".join(str(line)) + "\n")
-    #     f.write("NRMN of Wrongly Predicted Data:\n")
-    #     for line in  eval("fold_" + str(test_index) + "_nrmn")[wrong_predictions]:
-    #         f.write(" ".join(str(line)) + "\n")
-
-    # # plot training loss
-    # plt.figure()
-    # plt.plot(range(len(train_loss_history)), train_loss_history)
-    # plt.xlabel("Epoch")
-    # plt.ylabel("Training Loss")
-    # title = "test_fold_" + str(test_index) + "_" + "validation_fold_" + str(valid_index) + "_"
-    # for layer in model.hidden:
-    #     title += str(layer) + "_"
-    # title += "epoch_" + str(ITERATION) + "_training_loss"
-    # plt.title(title)
-    # plt.savefig("./plots/CNN/" + execution + "/" + title + ".png")
-    # plt.close()
-
-    # # plot training accuracy
-    # plt.figure()
-    # plt.plot(range(len(train_acc_history)), train_acc_history)
-    # plt.xlabel("Epoch")
-    # plt.ylabel("Training Accuracy")
-    # title = "test_fold_" + str(test_index) + "_" + "validation_fold_" + str(valid_index) + "_"
-    # for layer in model.hidden:
-    #     title += str(layer) + "_"
-    # title += "epoch_" + str(ITERATION) + "_training_accuracy"
-    # plt.title(title)
-    # plt.savefig("./plots/CNN/" + execution + "/" + title + ".png")
-    # plt.close()
-
-
-    # # plot test set loss
-    # plt.figure()
-    # plt.plot(range(len(valid_loss_history)), valid_loss_history)
-    # plt.xlabel("Epoch")
-    # plt.ylabel("Test Set Loss")
-    # title = "test_fold_" + str(test_index) + "_" + "validation_fold_" + str(valid_index) + "_"
-    # for layer in model.hidden:
-    #     title += str(layer) + "_"
-    # title += "epoch_" + str(ITERATION) + "_validation_set_loss"
-    # plt.title(title)
-    # plt.savefig("./plots/CNN/" + execution + "/" + title + ".png")
-    # plt.close()
-
-    # # plot roc auc of test set during training 
-    # plt.figure()
-    # plt.plot(range(len(auc_history)), auc_history)
-    # plt.xlabel("Epoch")
-    # plt.ylabel("AUC")
-    # title = "test_fold_" + str(test_index) + "_" + "validation_fold_" + str(valid_index) + "_"
-    # for layer in model.hidden:
-    #     title += str(layer) + "_"
-    # title += "epoch_" + str(ITERATION) + "_auc"
-    # plt.title(title)
-    # plt.savefig("./plots/CNN/" + execution + "/" + title + ".png")
-    # plt.close()
-
-    # save model weights
-    # title = "test_fold_" + str(test_index) + "_" + "validation_fold_" + str(valid_index) + "_"
-    # for layer in model.hidden:
-    #     title += str(layer) + "_"
-    # title += "epoch_" + str(ITERATION) + "_weights.pt"
-    # weights_path = "./weights/CNN/" + execution + "/" + title
-    # torch.save(model.state_dict(), weights_path)
-
     model = None
     optimizer = None
     loss_fn = None
@@ -549,28 +449,28 @@ for test_index in test_indices:
     rmsprop = None
     scaler = None
 
-with open("./logs/NN/auroc_scores.txt", "a") as f:
-    for auroc in auroc_folds:
-        f.write("%f\n" % (auroc))
-with open("./logs/NN/aupr_scores.txt", "a") as f:
-    for aupr in aupr_folds:
-        f.write("%f\n" % (aupr))
-with open("./logs/NN/f1_scores.txt", "a") as f:
-    for f1 in f1_folds:
-        f.write("%f\n" % (f1))  
-with open("./logs/NN/precision_scores.txt", "a") as f:
-    for prec in precision_folds:
-        f.write("%f\n" % (prec))
-with open("./logs/NN/recall_scores.txt", "a") as f:
-    for rec in recall_folds:
-        f.write("%f\n" % (rec))  
-with open("./logs/NN/acc_scores.txt", "a") as f:
-    for acc in acc_folds:
-        f.write("%f\n" % (acc))
-with open("./logs/NN/test_timing.txt", "a") as f:
-    for test in test_time_folds:
-        f.write("%f\n" % (test))
-with open("./logs/NN/train_timing.txt", "a") as f:
-    for train in train_time_folds:
-        f.write("%f\n" % (train)) 
+# with open("./logs/NN/auroc_scores.txt", "a") as f:
+#     for auroc in auroc_folds:
+#         f.write("%f\n" % (auroc))
+# with open("./logs/NN/aupr_scores.txt", "a") as f:
+#     for aupr in aupr_folds:
+#         f.write("%f\n" % (aupr))
+# with open("./logs/NN/f1_scores.txt", "a") as f:
+#     for f1 in f1_folds:
+#         f.write("%f\n" % (f1))  
+# with open("./logs/NN/precision_scores.txt", "a") as f:
+#     for prec in precision_folds:
+#         f.write("%f\n" % (prec))
+# with open("./logs/NN/recall_scores.txt", "a") as f:
+#     for rec in recall_folds:
+#         f.write("%f\n" % (rec))  
+# with open("./logs/NN/acc_scores.txt", "a") as f:
+#     for acc in acc_folds:
+#         f.write("%f\n" % (acc))
+# with open("./logs/NN/test_timing.txt", "a") as f:
+#     for test in test_time_folds:
+#         f.write("%f\n" % (test))
+# with open("./logs/NN/train_timing.txt", "a") as f:
+#     for train in train_time_folds:
+#         f.write("%f\n" % (train)) 
         
