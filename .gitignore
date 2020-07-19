@@ -1,4 +1,4 @@
 /data/dataset/
-/data/folds/
 /data/supplement.xls
-/lib
+/lib/pyNMR
+/reproduce/fold_data/

@@ -18,14 +18,31 @@ Doruk Cakmakci, Emin Onur Karakaslar, Elisa Ruhland, Marie-Pierre Chenard, Franc
 - scikit-learn
 - pandas
 - numpy
+- xlrd
 - [PyNMR](https://github.com/bennomeier/pyNMR)
 - [shap](https://github.com/slundberg/shap)
 
-## Getting Started
- - Create **/data** and **/lib** folders.
- - Download and Extract the dataset as a subdirectory of **/data** folder
+## Getting Started 
+ - Download the dataset from [here](https://zenodo.org/record/3951448). Extract the compressed folder and move **dataset** folder to **/data** folder as a subdirectory.
  - Download and save Supplementary Table 1 to **/data** folder. Rename the file to _supplement.xls_
- - Install dependencies. If an Ubuntu machine with GPU is used, dependencies may be installed by creating a conda environment using _ubuntu\_environment.yml_ file and installing _shap_  dependency using conda.
+ - Install dependencies. If an Ubuntu machine with GPU is used, dependencies may be installed by creating a conda environment using _ubuntu\_environment.yml_ file and installing _shap_ and _xlrd_ dependencies using conda.
  - Clone [PyNMR library](https://github.com/bennomeier/pyNMR) to **/lib**
  - Generate dataset using **create_dataset.py** by uncommenting corresponding dataset option (Lines 222-225)
  - Execute any model script (For random forest, SHAP plots will be saved to the same directory)
+
+## Reproduce Results 
+In order to reproduce the results reported in the preprint the dataset and folds must be downloaded from [here](https://zenodo.org/record/3951448). After extracting the compressed folder, **fold_data/** must be moved to **/reproduce/** as a subdirectory. Below you may find the instructions for reproducing Figure 2 and Figure 3 from the preprint.
+- Instructions for Figure 2:
+  - Panel A:
+    - Execute cnn.py, nn.py, rf.py, plsda.py and svm.py scripts located under **/reproduce/figure_2/control_tumor/seed_2453**, **/reproduce/figure_2/control_tumor/seed_1117** and **/reproduce/figure_2/control_tumor/seed_423** (In total of 15 scripts should be executed).
+    - Execute plot_boxplot.py located at **/reproduce/figure_2/control_tumor/**. The plot will be saved to the same directory.
+  - Panel B:
+    - Execute cnn.py, nn.py, rf.py, plsda.py and svm.py scripts located under **/reproduce/figure_2/benign_aggressive/seed_228**, **/reproduce/figure_2/benign_aggressive/seed_1849** and **/reproduce/figure_2/benign_aggressive/seed_2251** (In total of 15 scripts should be executed).
+    - Execute plot_boxplot.py located at **/reproduce/figure_2/benign_aggressive/**. The plot will be saved to the same directory.
+- Instructions for Figure 3:
+  - Panel A:
+    - Execute rf.py script located at **/reproduce/figure_3/control_tumor/seed_1648**. 
+    - The plot will be saved to **/reproduce/figure_3/control_tumor/seed_1648/plots**.
+  - Panel B:
+    -  Execute rf.py script located at **/reproduce/figure_3/benign_aggressive/seed_1648**.
+    -  The plot will be saved to **/reproduce/figure_3/benign_aggressive/seed_1648/plots**.
