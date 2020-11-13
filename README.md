@@ -1,6 +1,6 @@
 # Glioma Classification from HRMAS NMR Spectrum
 
-[Machine Learning Assisted Intraoperative Assessment of Brain Tumor Margins Using HRMAS NMR Spectroscopy](https://www.medrxiv.org/content/10.1101/2020.02.24.20026955v1) <br/>
+[Machine Learning Assisted Intraoperative Assessment of Brain Tumor Margins Using HRMAS NMR Spectroscopy](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008184) <br/>
 Doruk Cakmakci, Emin Onur Karakaslar, Elisa Ruhland, Marie-Pierre Chenard, Francois Proust, Martial Piotto, Izzie Jacques Namer and A. Ercument Cicek <br/>
 PLoS Computational Biology 2020, in press
 
